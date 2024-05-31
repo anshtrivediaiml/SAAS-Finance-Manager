@@ -13,5 +13,4 @@ const routes=app.route('/accounts',accounts) //All the routes will be forwared t
 
 export const GET = handle(app);
 export const POST = handle(app);
-
 export type AppType = typeof routes;
