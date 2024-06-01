@@ -29,7 +29,7 @@ async (c)=>{
 })
 .post('/', 
 clerkMiddleware(), //checking if the user is authenticated or not
-zValidator("json",insertAccountSchema.pick({
+zValidator('json',insertAccountSchema.pick({
     name:true,
 }))//validating that the post request should have the same schema as the insertAccountSchema
 ,async (c)=>{
