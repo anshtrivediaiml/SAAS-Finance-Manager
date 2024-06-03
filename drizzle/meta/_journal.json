@@ -15,6 +15,13 @@
       "when": 1717067754628,
       "tag": "0001_flowery_arachne",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "5",
+      "when": 1717408106265,
+      "tag": "0002_gray_red_ghost",
+      "breakpoints": true
     }
   ]
 }
