@@ -12,8 +12,8 @@ import { insertAccountSchema } from "@/db/schema";
 import { useGetIndividualAccount } from "../api/use-get-individual-account";
 import { Loader2 } from "lucide-react";
 import { useEditAccount } from "../api/use-edit-account";
-
-
+import { useDeleteAccount } from "../api/use-delete-account";
+import { useConfirm } from "@/hooks/use-confirm";
 
 const FormSchema = insertAccountSchema.pick({
   name:true,
@@ -25,9 +25,15 @@ export const EditAccountSheet = () => {
   
   const { isOpen,onClose,id } = useOpenAccount();
 
+  const [ConfirmationDialog,confirm]=useConfirm(
+    'Are you sure?',
+    'You are about to delete this account'
+  )
+
   const accountQuery= useGetIndividualAccount(id);
    const editMutation=useEditAccount(id);
-   const isPending=editMutation.isPending;
+   const deleteMutation=useDeleteAccount(id);
+   const isPending=editMutation.isPending || deleteMutation.isPending;
   
 
 const isLoading= accountQuery.isLoading;
@@ -39,11 +45,22 @@ const isLoading= accountQuery.isLoading;
     });
   };
 
+  const onDelete= async ()=>{
+    const ok= await confirm();
+    if(ok){
+      deleteMutation.mutate(undefined,{
+        onSuccess:()=>{onClose()},
+      });
+    }
+  };
+
   const defaultValues= accountQuery.data?{
     name:accountQuery.data.name,
   }:{name:""};
   
   return (
+    <>
+    <ConfirmationDialog/>
     <Sheet open={isOpen} onOpenChange={onClose}>
       <SheetContent className="space-y-4">
         <SheetHeader>
@@ -62,10 +79,13 @@ const isLoading= accountQuery.isLoading;
         onSubmit={onSubmit} 
         // If we would specify onSubmit={()=>onSubmit} then it wont work}
         disabled={isPending}
-        defaultValues={defaultValues}/>
+        defaultValues={defaultValues}
+        onDelete={onDelete}
+        />
         }
         
       </SheetContent>
     </Sheet>
+    </>
   );
 };
