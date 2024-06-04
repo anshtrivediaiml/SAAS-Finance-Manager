@@ -9,6 +9,9 @@ import { EditAccountSheet } from "@/features/accounts/components/edit-account-sh
 import { NewCategorySheet } from "@/features/categories/components/new-category-sheet"
 import { EditCategorySheet } from "@/features/categories/components/edit-category-sheet"
 
+import { NewTransactionSheet } from "@/features/transactions/components/new-transaction-sheet"
+
+
 export const SheetProvider=()=>{
     const isMounted = useMountedState(); //This is equivalent to the below usestate and useeffect lines of code
     // const [isMounted,setIsMounted]=useState(false);
@@ -22,6 +25,8 @@ export const SheetProvider=()=>{
 
        <NewCategorySheet/>
        <EditCategorySheet/>
+
+       <NewTransactionSheet/>
         </>
     )
 }
