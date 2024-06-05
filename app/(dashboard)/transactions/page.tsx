@@ -17,7 +17,8 @@ const TransactionsPage =()=>{
     const newTransaction =useNewTransaction();
     const deleteTransaction= useBulkDeleteTransactions();
     const TransactionsQuery = useGetTransactions();
-    const all_transactions= TransactionsQuery.data || []; 
+    const all_transactions = TransactionsQuery.data || []; 
+
     const isDisabled= TransactionsQuery.isLoading || deleteTransaction.isPending;
 
    if(TransactionsQuery.isLoading){
@@ -51,7 +52,7 @@ const TransactionsPage =()=>{
                 </CardHeader>
                 <CardContent>
                     <DataTable columns={columns} 
-                    filterKey='name' 
+                    filterKey='payee' 
                     data={all_transactions}
                     onDelete={(row)=>{
                         const ids = row.map((r)=>(r.original.id));

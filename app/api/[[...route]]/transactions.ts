@@ -38,7 +38,7 @@ async (c)=>{
     ?parse(to,'yyyy-MM-dd',new Date())
     :defaultTo;
 
-  const data =db.select({
+  const data = await db.select({
     id:transactions.id,
     date:transactions.date,
     category:categories.name,
@@ -46,8 +46,8 @@ async (c)=>{
     payee:transactions.payee,
     amount:transactions.amount,
     notes:transactions.notes,
-    accountId:transactions.accountId,
     account:accounts.name,
+    accountId:transactions.accountId,
   }).from(transactions)
   .innerJoin(accounts,eq(transactions.accountId,accounts.id))
   .leftJoin(categories,eq(transactions.categoryId,categories.id))  //Fetching the transactions details from the database by performing inner Join operation with accounts to make sure every transaction retrieved is related with an account and left join with categories as a transaction may or may not have a category
@@ -121,7 +121,8 @@ return c.json({data});
   zValidator('json',
     z.array(InsertTransactionSchema.omit({
       id:true,
-    }))
+    })
+  ),
   ),
   async(c)=>{
     const auth=getAuth(c);
@@ -155,7 +156,7 @@ async (c)=>{
       return c.json({error:"Unauthorized"},401);
   }
 
-  const transactionsToDelete= db.$with('transactions_to_delete').as(db.select({ id:transactions.id }).from(transactions).innerJoin(accounts,eq(transactions.accountId,accounts.id))
+  const transactionsToDelete= db.$with("transactions_to_delete").as(db.select({ id:transactions.id }).from(transactions).innerJoin(accounts,eq(transactions.accountId,accounts.id))
     .where(and(
       inArray(transactions.id,values.ids),
       eq(accounts.userId,auth.userId),
@@ -188,7 +189,7 @@ async (c)=>{
       return c.json({error:"Unauthorized"},401);
     }
          
-    const transactionsToUpdate= db.$with('transactions_to_update').as(db.select({ id:transactions.id }).
+    const transactionsToUpdate= db.$with("transactions_to_update").as(db.select({ id:transactions.id }).
     from(transactions)
     .innerJoin(accounts,eq(transactions.accountId,accounts.id))
     .where(and(

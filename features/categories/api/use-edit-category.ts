@@ -26,8 +26,7 @@ onSuccess:()=>{
     toast.success("Category updated successfully");
     queryClient.invalidateQueries({queryKey:['category',{id}]});
     queryClient.invalidateQueries({queryKey:['categories']});
-    //TODO:Invalidate summary and transactions
-
+    queryClient.invalidateQueries({queryKey:['transactions']});
     //It will refetch all categories everytime you create a new category as in the use-get-categories.ts file we have specified the queryKey as ["categories"]
 },
 onError:()=>{

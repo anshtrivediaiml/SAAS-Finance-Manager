@@ -12,3 +12,14 @@ export function convertAmountFromMiliUnits(amount:number){
 export function convertAmountToMiliUnits(amount:number){
 return Math.round(amount*1000);
 };
+
+export function formatCurrency(amount:number){
+  return(
+ new  Intl.NumberFormat('en-IN',{
+  style:'currency',
+  currency:'INR',
+minimumFractionDigits:2,
+}).format(amount)
+  ) 
+ 
+}
