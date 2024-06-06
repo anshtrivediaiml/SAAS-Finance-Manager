@@ -10,7 +10,7 @@ import { format,parse } from 'date-fns';
 const dateformat='yyyy-MM-dd HH:mm:ss'; //format which we will get im the CSV File
 const outputformat='yyyy-MM-dd'; //format which the database will accept
 
-const requireOptions=['amount','date','payee']
+const requireOptions=["amount","date","payee"]
 
 interface SelectedColumnState{
     [key:string]:string| null;
@@ -22,14 +22,20 @@ type Props={
     onSubmit:(data:any)=>void;
 }
 
-export const ImportCard=({data,onCancel,onSubmit}:Props)=>{
+export const ImportCard=({
+    data,
+    onCancel,
+    onSubmit
+}:Props)=>{
     
     const [selectedColumns,setSelectedColumns]=useState<SelectedColumnState>({});
     const headers=data[0];
     const body=data.slice(1);
 
 
-    const onTableHeadSelectChange=(columnIndex:number,value:string| null)=>{
+    const onTableHeadSelectChange=(columnIndex:number,
+    value:string| null
+    )=>{
         setSelectedColumns((prev)=>{
             const newSelectedColumns={...prev};
           for(const key in newSelectedColumns){
@@ -50,11 +56,11 @@ export const ImportCard=({data,onCancel,onSubmit}:Props)=>{
 
     const handleContinue=()=>{
         const getColumnIndex=(column:string)=>{
-            return column.split('_')[1];
+            return column.split("_")[1];
         };
 
         const mappedData={
-            headers:headers.map((header,index)=>{
+            headers:headers.map((_header,index)=>{
             const columnIndex=getColumnIndex(`column_${index}`);
             return selectedColumns[`column_${columnIndex}`] || null;
             }),
@@ -94,6 +100,12 @@ export const ImportCard=({data,onCancel,onSubmit}:Props)=>{
                   Import Transaction
                 </CardTitle>
                 <div className='flex flex-col lg:flex-row gap-y-2 items-center gap-x-2'>
+                <Button 
+                className='w-full lg:w-auto'
+                onClick={onCancel} size="sm">
+                 Cancel
+                </Button>
+                
                 <Button size="sm"
                 className='w-full lg:w-auto'
                 disabled={progress<requireOptions.length}
@@ -101,11 +113,7 @@ export const ImportCard=({data,onCancel,onSubmit}:Props)=>{
                 >
                     Continue ({progress}/{requireOptions.length})
                 </Button>
-                <Button 
-                className='w-full lg:w-auto'
-                onClick={onCancel} size="sm">
-                 Cancel
-                </Button>
+               
                 </div>
 
             </CardHeader>
