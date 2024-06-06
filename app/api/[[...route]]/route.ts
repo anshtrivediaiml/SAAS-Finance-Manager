@@ -1,12 +1,10 @@
 import {Hono} from 'hono';
 import {handle} from 'hono/vercel'
-import { zValidator } from '@hono/zod-validator';
-import {z} from 'zod'; //Importing zod which will act as a middleware for the request body validation
-import { clerkMiddleware,getAuth } from '@hono/clerk-auth'; //importing this to use the clerkMiddleware and getAuth function from the clerk-auth package when a user is authenticated or not
 import accounts from './accounts';
 import  categories  from './categories';
 import transactions from './transactions';
 export const runtime= 'edge';
+import summary from './summary';
 const app= new Hono().basePath('/api')
 
 const routes=app.route('/accounts',accounts)
@@ -14,6 +12,9 @@ const routes=app.route('/accounts',accounts)
  .route('/categories',categories)
  //All the categories routes will be forwarded to the categories file
 .route('/transactions',transactions)
+//Al the transaction routes will be forwarded to the transactions.ts file from here 
+.route('/summary',summary)
+//All the summary routes will be forwarded to the summary.ts file from this route
 
 export const GET = handle(app);
 export const POST = handle(app);

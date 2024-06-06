@@ -9,7 +9,6 @@ const DashBoardlayout = ({children}:Props) => {
     <Header/>
     <main className='px-3 lg:px-14'>
         {children}
-      This is dashboard 
     </main>
     </>
   )

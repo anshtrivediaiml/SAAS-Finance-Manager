@@ -5,6 +5,7 @@ import { useQuery } from "@tanstack/react-query";
 //We need to create an RPC client which we will use to communicate with the AppType from the route.ts and we are creating a client in the hono.ts file  
 import { client
  } from "@/lib/hono"; //here it is transferred 
+import { convertAmountFromMiliUnits } from "@/lib/utils";
  
 
  export const useGetIndividualTransaction = (id?:string)=>{
@@ -20,7 +21,10 @@ import { client
             throw new Error('failed to fetch transaction')
         }
     const  {data}  = await response.json();
-        return data;
+        return {
+            ...data,
+            amount:convertAmountFromMiliUnits(data.amount),
+        };
     } 
     })
     return query;
