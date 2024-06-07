@@ -7,7 +7,7 @@ const HeaderLogo = () => {
       <div className='items-center hidden lg:flex'>
         <Image src='/demologo2.svg' width={38} height={38} alt={"Logo"}/>
         <p className='font-semibold text-white text-2xl ml-2.5'>
-            Finance Manager
+            FinVisual
         </p>
       </div>
     </Link>
