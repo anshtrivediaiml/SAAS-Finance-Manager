@@ -22,7 +22,7 @@ const mutation=useMutation<ResponseType,Error,RequestType>
 onSuccess:()=>{
     toast.success("Transactions created successfully ");
     queryClient.invalidateQueries({queryKey:['transactions']});
-    //TODO:Also Invalidate summary
+    queryClient.invalidateQueries({queryKey:['summary']});
     //It will refetch all transactions everytime you create a new transaction as in the use-get-transactions.ts file we have specified the queryKey as ["transactions"]
 },
 onError:()=>{

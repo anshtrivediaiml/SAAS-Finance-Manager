@@ -22,8 +22,10 @@ const mutation=useMutation<ResponseType,Error,RequestType>
 onSuccess:()=>{
     toast.success("Transactions deleted successfully ");
     queryClient.invalidateQueries({queryKey:['transactions']});
-    //TODO:Also Invalidate summary
-    //It will refetch all transactions everytime you create a new transaction as in the use-get-transactions.ts file we have specified the queryKey as ["transactions"]
+    queryClient.invalidateQueries({queryKey:['summary']});
+
+
+    //It will refetch all transactions and summary everytime you create a new transaction as in the use-get-transactions.ts file we have specified the queryKey as ["transactions"] and ["summary"]from use-get-summary.ts
 },
 onError:()=>{
 toast.error("Failed to delete transactions");

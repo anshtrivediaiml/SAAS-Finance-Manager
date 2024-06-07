@@ -22,9 +22,10 @@ const mutation=useMutation<ResponseType,Error,RequestType>
 onSuccess:()=>{
     toast.success("Transaction created successfully");
     queryClient.invalidateQueries({queryKey:['transactions']});
-    //It will refetch all transactions everytime you create a new account as in the use-get-transactions.ts file we have specified the queryKey as ["transactions"]
+    queryClient.invalidateQueries({queryKey:['summary']});
+    //It will refetch all transactions and summary everytime you create a new account as in the use-get-transactions.ts file we have specified the queryKey as ["transactions"] and ["summary"] from use-get-summary.ts
 
-    //TODO:Invalidate summary 
+    
 },
 onError:()=>{
 toast.error("Failed to create transaction");

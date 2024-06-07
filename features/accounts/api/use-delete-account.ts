@@ -23,6 +23,7 @@ onSuccess:()=>{
     queryClient.invalidateQueries({queryKey:['account',{id}]});
     queryClient.invalidateQueries({queryKey:['accounts']});
     queryClient.invalidateQueries({queryKey:['transactions']});
+    queryClient.invalidateQueries({queryKey:['summary']});
 
     //It will refetch all accounts everytime you create a new account as in the use-get-accounts.ts file we have specified the queryKey as ["accounts"]
 },

@@ -22,7 +22,7 @@ const mutation=useMutation<ResponseType,Error,RequestType>
 onSuccess:()=>{
     toast.success("categories deleted successfully ");
     queryClient.invalidateQueries({queryKey:['categories']});
-    //TODO:Also Invalidate summary
+    queryClient.invalidateQueries({queryKey:['summary']});
     //It will refetch all categories everytime you create a new category as in the use-get-categories.ts file we have specified the queryKey as ["categories"]
 },
 onError:()=>{

@@ -27,7 +27,8 @@ onSuccess:()=>{
     queryClient.invalidateQueries({queryKey:['category',{id}]});
     queryClient.invalidateQueries({queryKey:['categories']});
     queryClient.invalidateQueries({queryKey:['transactions']});
-    //It will refetch all categories everytime you create a new category as in the use-get-categories.ts file we have specified the queryKey as ["categories"]
+    queryClient.invalidateQueries({queryKey:['summary']});
+    //It will refetch all categories everytime you create a new category as in the use-get-categories.ts file we have specified the queryKey as ["categories"] and also the summary will be refreshed as in the use-get-summary.ts file we have specified the queryKey as ["summary"]
 },
 onError:()=>{
 toast.error("Failed to edit category");

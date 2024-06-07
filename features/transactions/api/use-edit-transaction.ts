@@ -26,9 +26,8 @@ onSuccess:()=>{
     toast.success("Transaction updated successfully");
     queryClient.invalidateQueries({queryKey:['transaction',{id}]});
     queryClient.invalidateQueries({queryKey:['transactions']});
-    //TODO:Invalidate summary and transactions
-
-    //It will refetch all transactions everytime you create a new transaction as in the use-get-transactions.ts file we have specified the queryKey as ["transactions"]
+    queryClient.invalidateQueries({queryKey:['summary']});
+    //It will refetch all transactions and summary everytime you create a new transaction as in the use-get-transactions.ts file and use-get-summary.ts we have specified the queryKey as ["transactions"] and ["summary"]
 },
 onError:()=>{
 toast.error("Failed to edit transaction");
