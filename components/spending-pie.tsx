@@ -34,7 +34,7 @@ export const SpendingPie=({data=[]}:Props)=>{
 
 return (
     <Card className="border-none drop-shadow-sm">
-        <CardHeader className="flex space-y-2 lg:space-y-0 lg:flex-row lg:items-center justify-between">
+        <CardHeader className="flex space-y-2 lg:space-y-0 lg:flex-col lg:items-center justify-between">
             <CardTitle className="text-xl line-clamp-1">
                 Categories
             </CardTitle>
@@ -83,9 +83,9 @@ return (
                     <>
                     {chartType==='pie' && <PieVariant data={data}/>}
 
-                    {chartType==='radar'&& <RadarVariant data={data}/>}
+                    {chartType==='radar' && <RadarVariant data={data}/>}
 
-                     {chartType==='radial'&& <RadialVariant data={data}/>}
+                     {chartType==='radial' && <RadialVariant data={data}/>}
                     </>
                     
                 

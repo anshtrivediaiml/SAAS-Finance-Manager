@@ -57,7 +57,7 @@ export const PieVariant=({data}:Props)=>{
             <Tooltip content={<CategoryTooltip/>}/>
             <Pie data={data} cx="50%" cy="50%" outerRadius={90}
             innerRadius={60} paddingAngle={2} fill="#8884d8"
-            dataKey={"value"}
+            dataKey="value"
             labelLine={false}
             >
              {data.map((_entry,index)=>(

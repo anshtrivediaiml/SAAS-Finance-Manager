@@ -27,7 +27,7 @@ export const DataCharts=()=>{
             <Chart data={data?.days}/>
             
         </div>            
-           <div>
+           <div className="col-span-1 lg:col-span-3 xl:col-span-2">
             <SpendingPie data={data?.categories} />
            </div>
         </div>
