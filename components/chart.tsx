@@ -70,6 +70,7 @@ return (
                 </SelectItem>
               </SelectContent>
             </Select>
+            </CardHeader>
             <CardContent>
                 {data.length===0?(
                    <div className="flex flex-col gap-y-4 items-center justify-center h-[350px] w-full">
@@ -90,8 +91,6 @@ return (
                 
                 )}
             </CardContent>
-
-        </CardHeader>
     </Card>
 )
 }
